@@ -60,15 +60,11 @@ def state_to_str(state: State) -> str:
         for x in range(state.width):
             index = cell_index(state, x, y)
             is_alive = state.board[index]
-            cellsprite = 'o' if is_alive else '.'
+            cellsprite = 'o ' if is_alive else '. '
             output.append(cellsprite)
         output.append('\n')
 
     return ''.join(output)
-
-
-def clear_state_str(state: State) -> str:
-    return '\b' * state.width * state.height + '\b' * state.height
 
 
 def random_state(width: int, height: int) -> State:

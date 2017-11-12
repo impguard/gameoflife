@@ -1,0 +1,28 @@
+#!/bin/bash
+
+
+bake_task build "Builds the golang docker image"
+function build()
+{
+    docker pull golang:1.9.2
+}
+
+function drun()
+{
+    exec docker run -it --rm --name gowrapper \
+        --workdir /go/src/app \
+        --volume "$(pwd)":/go/src/app \
+        golang:1.9.2 "$@"
+}
+
+bake_task run "Runs the docker package"
+function run()
+{
+    drun /bin/bash -c "go-wrapper install && go-wrapper run"
+}
+
+bake_task unittest "Test the docker package"
+function unittest()
+{
+    drun go test
+}

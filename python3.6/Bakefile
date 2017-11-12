@@ -6,6 +6,12 @@ function prun()
     exec pipenv run "$@"
 }
 
+bake_task build "Builds the application"
+function build()
+{
+    pipenv install
+}
+
 bake_task run "Runs the application"
 function run()
 {

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+function prun()
+{
+    exec pipenv run "$@"
+}
+
+bake_task run "Runs the application"
+function run()
+{
+    prun python -m app
+}
+
+bake_task unittest "Tests the application"
+function unittest()
+{
+    prun py.test
+}

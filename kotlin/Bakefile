@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+
+bake_task init "Initialize the project."
+function init ()
+{
+    docker pull rayyildiz/kotlin:1.1.51
+}
+
+
+function krun ()
+{
+    docker run -it --rm --name kotlin \
+        --workdir /workspace \
+        --volume "$(pwd)":/workspace \
+        rayyildiz/kotlin:1.1.51 "$@"
+}
+
+bake_task shell "Shell into the koitlin environment."
+function shell ()
+{
+    krun /bin/bash
+}
+
+bake_task run "Build the gameoflife jar."
+function run ()
+{
+    krun /bin/bash -c 'kotlinc main.kt -include-runtime -d gameoflife.jar && java -jar gameoflife.jar'
+}
+
+bake_task repl "Run a kotlin repl."
+function repl ()
+{
+    krun kotlinc-jvm
+}

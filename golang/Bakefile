@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-bake_task build "Builds the golang docker image"
-function build()
+bake_task init "Initializes the project"
+function init()
 {
     docker pull golang:1.9.2
 }
